@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+using Utilites;
 
 namespace Homework06
 {
 	internal class Program
 	{
-		private const char Separator = '#';
-		private static readonly string EmployeeDataPath = "../../data.txt";
-		private static readonly string IdDataPath = "../../id.txt";
-		private static int idCounter;
 		private static string[] columnNames = { "Full name", "Age", "Height", "Birth date", "Birthplace" };
+		private static Repository repository;
 		
 		public static void Main(string[] args)
 		{
 			bool exitRequested = false;
-			idCounter = LoadCurrentId();
+			repository = new Repository();
 			PrintInstructions();
 
 			while (!exitRequested)
@@ -33,7 +28,7 @@ namespace Homework06
 					}
 					case "1":
 					{
-						CreateNewEmployee();
+						CreateNewWorker();
 						
 						break;
 					}
@@ -58,90 +53,48 @@ namespace Homework06
 			}
 		}
 
-		private static int LoadCurrentId()
-		{
-			if (File.Exists(IdDataPath))
-			{
-				string idString = File.ReadAllText(IdDataPath);
-
-				if (int.TryParse(idString, out int id))
-				{
-					return id;
-				}
-			}
-
-			return 0;
-		}
-
 		private static void PrintData()
 		{
-			if (!File.Exists(EmployeeDataPath))
-			{
-				Console.WriteLine("No data");
-				
-				return;
-			}
-			
-			string[] lines = File.ReadAllLines(EmployeeDataPath);
+			Worker[] workers = repository.GetAllWorkers();
 
-			foreach (string line in lines)
+			foreach (Worker worker in workers)
 			{
-				string[] values = line.Split(Separator); 
-				Console.WriteLine($"Id: {values[0]}");
-				Console.WriteLine($"Created at: {values[1]}");
-
-				for (int i = 0; i < columnNames.Length; i++)
-				{
-					Console.WriteLine($"{columnNames[i]}: {values[i + 2]}");
-				}
-				
+				Console.WriteLine($"Id: {worker.Id}");
+				Console.WriteLine($"Created at: {worker.CreatedAt:dd.MM.yyyy}");
+				Console.WriteLine($"FullName: {worker.FullName}");
+				Console.WriteLine($"Age: {worker.Age}");
+				Console.WriteLine($"Height: {worker.Height}");
+				Console.WriteLine($"Birth date: {worker.BirthDate:dd.MM.yyyy}");
+				Console.WriteLine($"Birth place: {worker.BirthPlace}");
 				Console.WriteLine();
 			}
 		}
 
-		private static void CreateNewEmployee()
+		private static void CreateNewWorker()
 		{
-			string employData = GetEmployeeDataFromConsole();
-			
-			using (StreamWriter writer = new StreamWriter(EmployeeDataPath, append : true))
-			{
-				writer.WriteLine(employData);
-			}
-
-			IncreaseIdCounter();
+			Worker worker = GetWorkerDataFromConsole();
+			repository.AddWorker(worker);
 		}
 
-		private static void IncreaseIdCounter()
-		{
-			idCounter++;
-			File.WriteAllText(IdDataPath, idCounter.ToString());
-		}
-
+		
 		private static void PrintInstructions()
 		{
 			Console.WriteLine("Enter command:\n0 - exit\n1 - enter new employee data\n2 - print data");
 		}
 
-		private static string GetEmployeeDataFromConsole()
+		private static Worker GetWorkerDataFromConsole()
 		{
-			List<string> dataList = new List<string>();
-
-			int id = idCounter;
-			dataList.Add(id.ToString());
+			Worker worker = new Worker();
 			
-			DateTime date = DateTime.Now;
-			dataList.Add(date.ToString(CultureInfo.InvariantCulture));
-
 			Console.WriteLine("Enter employee data:");
 
-			foreach (string columnName in columnNames)
-			{
-				Console.Write($"{columnName}: ");
-				string input = Console.ReadLine();
-				dataList.Add(input);
-			}
-			
-			return string.Join(Separator.ToString(), dataList);
+			worker.FullName = Utils.GetStringFromConsole("Enter full name: ");
+			worker.Age = Utils.GetIntFromConsole("Enter age: ");
+			worker.Height = Utils.GetIntFromConsole("Enter height: ");
+			worker.BirthDate = Utils.GetDateFromConsole("Enter birth date: ");
+			worker.BirthPlace = Utils.GetStringFromConsole("Enter birth place: ");
+
+			return worker;
 		}
 	}
 }

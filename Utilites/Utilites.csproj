@@ -4,14 +4,13 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{88A2957A-ED0B-40C3-BC85-E2E2B1DCD632}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <ProjectGuid>{4E4FF3A3-B8B1-4820-A9F0-908E61E7C3AE}</ProjectGuid>
+        <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Homework06</RootNamespace>
-        <AssemblyName>Homework06</AssemblyName>
+        <RootNamespace>Utilites</RootNamespace>
+        <AssemblyName>Utilites</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,16 +38,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Program.cs" />
+        <Compile Include="Utils.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Repository.cs" />
-        <Compile Include="Worker.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\Utilites\Utilites.csproj">
-        <Project>{4e4ff3a3-b8b1-4820-a9f0-908e61e7c3ae}</Project>
-        <Name>Utilites</Name>
-      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
