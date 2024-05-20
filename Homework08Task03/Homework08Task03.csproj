@@ -8,7 +8,7 @@
         <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>Homework01Task03</RootNamespace>
-        <AssemblyName>Homework01Task03</AssemblyName>
+        <AssemblyName>Homework08Task03</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

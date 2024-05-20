@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework08Task01", "Homewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework08Task02", "Homework08Task02\Homework08Task02.csproj", "{C9CAAB42-B1D3-4B10-96CA-AC88501BC2D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework01Task03", "Homework01Task03\Homework01Task03.csproj", "{6B1E0755-8DCA-4750-8F3D-77B1BDD85018}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework08Task03", "Homework08Task03\Homework08Task03.csproj", "{6B1E0755-8DCA-4750-8F3D-77B1BDD85018}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework08Task04", "Homework08Task04\Homework08Task04.csproj", "{93E50314-B63F-446F-8F48-E9468F04916F}"
 EndProject
