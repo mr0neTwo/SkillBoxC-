@@ -2,7 +2,7 @@
 
 namespace Homework05Task01
 {
-	internal class Program
+	public class HomeWork05Task01
 	{
 		public static void Main(string[] args)
 		{
@@ -12,7 +12,7 @@ namespace Homework05Task01
 			PrintWords(words);
 		}
 
-		private static string[] SplitSentence(string sentence)
+		public static string[] SplitSentence(string sentence)
 		{
 			string symbolsToRemove = ".,;:)({}!?";
 

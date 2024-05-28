@@ -1,0 +1,69 @@
+﻿<Page x:Class="ClientWFP.Clients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ClientWFP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Clients">
+
+    <Page.DataContext>
+        <local:ClientViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <local:DateConverter x:Key="DateConverter" />
+    </Page.Resources>
+
+    <Grid Background="#FFD0D0D0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="359*"/>
+        </Grid.RowDefinitions>
+
+        <Label 
+            Content="Clients" 
+            VerticalAlignment="Center"
+            Margin="20 0 0 0"
+            FontSize="28"
+            RenderTransformOrigin="0.354,-0.014"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button 
+                x:Name="CreateNewClientButton" 
+                Content="Create"
+                Width="100" 
+                Click="OnCreateButtonClicked"/>
+            <TextBox 
+                x:Name="SearchTextBox" 
+                TextWrapping="Wrap"
+                Margin="20 0 0 0"
+                Width="300" TextChanged="OnTextChanged"/>
+            <Button 
+                x:Name="FindButton" 
+                Margin="10 0 0 0"
+                Content="Find"
+                Width="100"
+                Click="OnFindButtonClicked"/>
+
+        </StackPanel>
+        <DataGrid 
+            Grid.Row="2"
+            ItemsSource="{Binding Clients}" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="False"
+            MouseDoubleClick="OnClientDoubleClicked">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" IsReadOnly="True" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name" IsReadOnly="True" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Third Name" IsReadOnly="True" Binding="{Binding ThirdName}" />
+                <DataGridTextColumn Header="Phone Number" IsReadOnly="True" Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Header="Passport Number" IsReadOnly="True" Binding="{Binding PassportNumber}" />
+                <DataGridTextColumn Header="CreatedAt" IsReadOnly="True" Binding="{Binding CreatedAt, Converter={StaticResource DateConverter}}" />
+                <DataGridTextColumn Header="UpdatedAt" IsReadOnly="True" Binding="{Binding UpdatedAt, Converter={StaticResource DateConverter}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

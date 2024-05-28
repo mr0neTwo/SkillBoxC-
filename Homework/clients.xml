@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfClient xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Client>
+    <Id>1</Id>
+    <FirstName>Robert</FirstName>
+    <LastName>Baratheon</LastName>
+    <ThirdName>Deer</ThirdName>
+    <PhoneNumber>+7(900)111-33-22</PhoneNumber>
+    <PassportNumber>12 21 423445</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>2</Id>
+    <FirstName>Ned</FirstName>
+    <LastName>Stark</LastName>
+    <ThirdName>Wolf</ThirdName>
+    <PhoneNumber>+7(900)665-43-55</PhoneNumber>
+    <PassportNumber>23 87 244562</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>3</Id>
+    <FirstName>Jaime</FirstName>
+    <LastName>Lannister</LastName>
+    <ThirdName>Lion</ThirdName>
+    <PhoneNumber>+7(900)123-45-67</PhoneNumber>
+    <PassportNumber>14 56 789012</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>4</Id>
+    <FirstName>Cersei</FirstName>
+    <LastName>Lannister</LastName>
+    <ThirdName>Lioness</ThirdName>
+    <PhoneNumber>+7(900)234-56-78</PhoneNumber>
+    <PassportNumber>16 78 901234</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>5</Id>
+    <FirstName>Tyrion</FirstName>
+    <LastName>Lannister</LastName>
+    <ThirdName>Imp</ThirdName>
+    <PhoneNumber>+7(900)345-67-89</PhoneNumber>
+    <PassportNumber>18 90 123456</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>6</Id>
+    <FirstName>Daenerys</FirstName>
+    <LastName>Targaryen</LastName>
+    <ThirdName>Stormborn</ThirdName>
+    <PhoneNumber>+7(900)456-78-90</PhoneNumber>
+    <PassportNumber>11 12 345678</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>7</Id>
+    <FirstName>Jon</FirstName>
+    <LastName>Snow</LastName>
+    <ThirdName>Ghost</ThirdName>
+    <PhoneNumber>+7(900)567-89-01</PhoneNumber>
+    <PassportNumber>13 23 456789</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>8</Id>
+    <FirstName>Sansa</FirstName>
+    <LastName>Stark</LastName>
+    <ThirdName>Lady</ThirdName>
+    <PhoneNumber>+7(900)678-90-12</PhoneNumber>
+    <PassportNumber>15 34 567890</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>9</Id>
+    <FirstName>Arya</FirstName>
+    <LastName>Stark</LastName>
+    <ThirdName>Needle</ThirdName>
+    <PhoneNumber>+7(900)789-01-23</PhoneNumber>
+    <PassportNumber>17 45 678901</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>10</Id>
+    <FirstName>Bran</FirstName>
+    <LastName>Stark</LastName>
+    <ThirdName>Raven</ThirdName>
+    <PhoneNumber>+7(900)890-12-34</PhoneNumber>
+    <PassportNumber>19 56 789012</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>11</Id>
+    <FirstName>Rickon</FirstName>
+    <LastName>Stark</LastName>
+    <ThirdName>Shaggydog</ThirdName>
+    <PhoneNumber>+7(900)901-23-45</PhoneNumber>
+    <PassportNumber>20 67 890123</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>12</Id>
+    <FirstName>Jorah</FirstName>
+    <LastName>Mormont</LastName>
+    <ThirdName>Bear</ThirdName>
+    <PhoneNumber>+7(900)012-34-56</PhoneNumber>
+    <PassportNumber>21 78 901234</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716934141</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>13</Id>
+    <FirstName>Samwell</FirstName>
+    <LastName>Tarly</LastName>
+    <ThirdName>Scholar</ThirdName>
+    <PhoneNumber>+7(900)123-45-67</PhoneNumber>
+    <PassportNumber>22 89 012345</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>14</Id>
+    <FirstName>Theon</FirstName>
+    <LastName>Greyjoy</LastName>
+    <ThirdName>Reek</ThirdName>
+    <PhoneNumber>+7(900)234-56-78</PhoneNumber>
+    <PassportNumber>23 90 123456</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>15</Id>
+    <FirstName>Brienne</FirstName>
+    <LastName>Tarth</LastName>
+    <ThirdName>Beauty</ThirdName>
+    <PhoneNumber>+7(900)345-67-89</PhoneNumber>
+    <PassportNumber>24 01 234567</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>16</Id>
+    <FirstName>Sandor</FirstName>
+    <LastName>Clegane</LastName>
+    <ThirdName>Hound</ThirdName>
+    <PhoneNumber>+7(900)456-78-90</PhoneNumber>
+    <PassportNumber>25 12 345678</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>17</Id>
+    <FirstName>Petyr</FirstName>
+    <LastName>Baelish</LastName>
+    <ThirdName>Littlefinger</ThirdName>
+    <PhoneNumber>+7(900)567-89-01</PhoneNumber>
+    <PassportNumber>26 23 456789</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>18</Id>
+    <FirstName>Varys</FirstName>
+    <LastName>Unknown</LastName>
+    <ThirdName>Spider</ThirdName>
+    <PhoneNumber>+7(900)678-90-12</PhoneNumber>
+    <PassportNumber>27 34 567890</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>19</Id>
+    <FirstName>Melisandre</FirstName>
+    <LastName>Asshai</LastName>
+    <ThirdName>Red</ThirdName>
+    <PhoneNumber>+7(900)789-01-23</PhoneNumber>
+    <PassportNumber>28 45 678901</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>20</Id>
+    <FirstName>Stannis</FirstName>
+    <LastName>Baratheon</LastName>
+    <ThirdName>Iron</ThirdName>
+    <PhoneNumber>+7(900)890-12-34</PhoneNumber>
+    <PassportNumber>29 56 789012</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+  <Client>
+    <Id>21</Id>
+    <FirstName>Davos</FirstName>
+    <LastName>Seaworth</LastName>
+    <ThirdName>Onion</ThirdName>
+    <PhoneNumber>+7(900)901-23-45</PhoneNumber>
+    <PassportNumber>30 67 890123</PassportNumber>
+    <CreatedAt>1716932465</CreatedAt>
+    <UpdatedAt>1716932465</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+  </Client>
+</ArrayOfClient>
