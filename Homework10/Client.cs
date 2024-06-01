@@ -1,6 +1,6 @@
 ﻿namespace Database
 {
-    public struct Client
+    public struct Client : IDatabaseTable
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -21,10 +21,10 @@ namespace ClientWFP
             _dataBase = dataBase;
 
             _clientViewModel = new ClientViewModel();
-            _clientViewModel.UpdateClients(dataBase.GetAllClients());
+            _clientViewModel.UpdateClients(dataBase.Clients.GetAll());
             DataContext = _clientViewModel;
 
-            _dataBase.DataChenged += OnDataChanged;
+            _dataBase.Clients.DataChanged += OnDataChanged;
         }
 
         private void OnDataChanged()

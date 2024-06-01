@@ -12,27 +12,27 @@ namespace ClientWFP
 
         public void AddClient(DataBase dataBase, Client client)
         {
-            dataBase.AddClient(Id, client);
+            dataBase.Clients.Add(Id, client);
         }
 
         public void UpdateClientData(DataBase dataBase, Client client)
         {
-            dataBase.UpdateClientData(Id, client);
+            dataBase.Clients.Update(Id, client);
         }
 
         public Client[] FindClients(DataBase dataBase, string searchWord)
         {
-            return dataBase.FindClients(searchWord);
+            return dataBase.Clients.Find(searchWord);
         }
 
         public Client[] GetAllClients(DataBase dataBase)
         {
-           return dataBase.GetAllClients();
+           return dataBase.Clients.GetAll();
         }
 
         public void RemoveClient(DataBase dataBase, Client client)
         {
-            dataBase.RemoveClient(client);
+            dataBase.Clients.Remove(client);
         }
     }
 }

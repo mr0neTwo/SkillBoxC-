@@ -13,7 +13,7 @@ namespace ClientWFP
 
         public Client[] FindClients(DataBase dataBase, string searchWord)
         {
-            Client[] clients = dataBase.FindClients(searchWord);
+            Client[] clients = dataBase.Clients.Find(searchWord);
             clients = ApplyCensorship(clients);
 
             return clients;
@@ -21,7 +21,7 @@ namespace ClientWFP
 
         public Client[] GetAllClients(DataBase dataBase)
         {
-            Client[] clients = dataBase.GetAllClients();
+            Client[] clients = dataBase.Clients.GetAll();
             clients = ApplyCensorship(clients);
 
             return clients;
