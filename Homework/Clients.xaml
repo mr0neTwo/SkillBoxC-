@@ -34,7 +34,8 @@
                 x:Name="CreateNewClientButton" 
                 Content="Create"
                 Width="100" 
-                Click="OnCreateButtonClicked"/>
+                Click="OnCreateButtonClicked"
+                Visibility="{Binding CreateButtonVisibility}"/>
             <TextBox 
                 x:Name="SearchTextBox" 
                 TextWrapping="Wrap"

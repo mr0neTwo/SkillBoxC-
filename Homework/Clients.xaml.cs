@@ -10,94 +10,45 @@ namespace ClientWFP
     /// </summary>
     public partial class Clients : Page
     {
-        private IDatabaseReader _databaseReader;
-        private IDatabaseModifierer _databaseModifierer;
-        private DataBase _dataBase;
         private ClientViewModel _clientViewModel;
+        private readonly AppData _appData;
 
-        public Clients(DataBase dataBase)
+        public Clients(AppData appData)
         {
             InitializeComponent();
-            _dataBase = dataBase;
 
+            _appData = appData;
             _clientViewModel = new ClientViewModel();
-            _clientViewModel.UpdateClients(dataBase.Clients.GetAll());
+            _clientViewModel.Initialize(appData);
             DataContext = _clientViewModel;
 
-            _dataBase.Clients.DataChanged += OnDataChanged;
         }
-
-        private void OnDataChanged()
-        {
-            UpdateAllClients();
-        }
-
 
         private void OnCreateButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (_databaseModifierer == null)
-            {
-                return;
-            }
-
-            CreateClientWindow clientFormWindow = new CreateClientWindow();
+           
+            ClientDataWindow clientFormWindow = new ClientDataWindow();
             bool? result = clientFormWindow.ShowDialog();
 
             if (result == true)
             {
                 Client newClient = clientFormWindow.Client;
-                _databaseModifierer.AddClient(_dataBase, newClient);
+                _clientViewModel.AddClient(newClient);
             }
         }
 
         private void OnFindButtonClicked(object sender, RoutedEventArgs e)
         {
-            if (_databaseReader == null)
-            {
-                return;
-            }
-
             string searchWord = SearchTextBox.Text;
-            Client[] clients = _databaseReader.FindClients(_dataBase, searchWord);
-            _clientViewModel.UpdateClients(clients);
+            _clientViewModel.FindClients(searchWord);
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(SearchTextBox.Text))
             {
-                UpdateAllClients();
+                _clientViewModel.UpdateClients();
             }
-        }
-
-        private void UpdateAllClients()
-        {
-            if (_databaseReader == null)
-            {
-                return;
-            }
-
-            Client[] clients = _databaseReader.GetAllClients(_dataBase);
-            _clientViewModel.UpdateClients(clients);
-        }
-
-        internal void ChangeUser(User user)
-        {            
-            if(user is Manager manager)
-            {
-                _databaseReader = manager;
-                _databaseModifierer = manager;
-                CreateNewClientButton.Visibility = Visibility.Visible;
-            }
-
-            if (user is Consultant consultant)
-            {
-                _databaseReader = consultant;
-                _databaseModifierer = null;
-                CreateNewClientButton.Visibility = Visibility.Collapsed;
-            }
-
-            UpdateAllClients();
         }
 
         private void OnClientDoubleClicked(object sender, EventArgs e)
@@ -110,19 +61,15 @@ namespace ClientWFP
                 return;
             }
 
-            if (_databaseModifierer == null)
-            {
-                return;
-            }
-
-            CreateClientWindow clientFormWindow = new CreateClientWindow();
+            ClientDataWindow clientFormWindow = new ClientDataWindow();
             clientFormWindow.Client = client;
+            clientFormWindow.EnableFieldByPermissions(_appData.CurrentUser.Permissions);
             bool? result = clientFormWindow.ShowDialog();
 
             if (result == true)
             {
                 Client newClient = clientFormWindow.Client;
-                _databaseModifierer.UpdateClientData(_dataBase, newClient);
+               _clientViewModel.UpdateClientData(newClient);
             }
         }
     }

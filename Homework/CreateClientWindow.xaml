@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClientWFP.CreateClientWindow"
+﻿<Window x:Class="ClientWFP.ClientDataWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,6 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock 
+            x:Name="FirstNameTextBlock" 
             Grid.Row="0" 
             Grid.Column="0" 
             Margin="5" 
@@ -36,6 +37,7 @@
             Name="FirstNameTextBox" />
 
         <TextBlock 
+            x:Name="LastNameTextBlock" 
             Grid.Row="1" 
             Grid.Column="0" 
             Margin="5" 
@@ -47,6 +49,7 @@
             Name="LastNameTextBox" />
 
         <TextBlock 
+            x:Name="ThirdNameTextBlock" 
             Grid.Row="2" 
             Grid.Column="0" 
             Margin="5" 
@@ -58,6 +61,7 @@
             Name="ThirdNameTextBox" />
 
         <TextBlock 
+            x:Name="PhoneNumberTextBlock" 
             Grid.Row="3" 
             Grid.Column="0" 
             Margin="5" 
@@ -69,6 +73,7 @@
             Name="PhoneNumberTextBox" />
 
         <TextBlock 
+            x:Name="PasswordNumberTextBlock" 
             Grid.Row="4" 
             Grid.Column="0" 
             Margin="5" 

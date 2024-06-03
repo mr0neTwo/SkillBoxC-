@@ -1,4 +1,4 @@
-﻿using ClientWFP;
+﻿using ClientWFP.Users;
 using Database;
 using System.Windows;
 
@@ -9,28 +9,24 @@ namespace ClientWFP
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DataBase _dataBase;
+        private DataProvider _dataProvider;
+
+
         private Clients _clientsPage;
         private SettingPage _settingPage;
 
-        private Manager _manager;
-        private Consultant _consultant;
 
         public MainWindow()
         {
-            _dataBase = new DataBase();
-            _clientsPage = new Clients(_dataBase);
-            _settingPage = new SettingPage();
 
-            _manager = new Manager(1, "Mark");
-            _consultant = new Consultant(2, "Bob");
+            AppData _appData = new AppData();
+
+            _clientsPage = new Clients(_appData);
+            _settingPage = new SettingPage(_appData);
 
             InitializeComponent();
 
             MainFrame.Content = _clientsPage;
-
-            _settingPage.RoleSelected += OnRoleSelected;
-            _clientsPage.ChangeUser(_consultant);
         }
 
 
@@ -43,19 +39,5 @@ namespace ClientWFP
         {
             MainFrame.Content = _settingPage;
         }
-
-        private void OnRoleSelected(Role role)
-        {
-            switch (role)
-            {
-                case Role.Manager:
-                    _clientsPage.ChangeUser(_manager);
-                    break;
-                case Role.Consultant:
-                    _clientsPage.ChangeUser(_consultant);
-                    break;
-            }
-        }
     }
-
 }

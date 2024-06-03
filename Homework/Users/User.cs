@@ -1,11 +1,10 @@
-﻿namespace ClientWFP
+﻿namespace ClientWFP.Users
 {
     public abstract class User
     {
         public int Id { get; }
         public string Name { get; }
-
-        protected abstract AccessType Access { get; }
+        public abstract Permissions Permissions { get; }
 
         protected User(int id, string name)
         {

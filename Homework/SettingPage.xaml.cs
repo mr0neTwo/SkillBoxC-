@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using ClientWFP.Users;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClientWFP
 {
@@ -20,11 +8,17 @@ namespace ClientWFP
     /// </summary>
     public partial class SettingPage : Page
     {
-        public event Action<Role> RoleSelected;
+        private readonly Manager _manager;
+        private readonly Consultant _consultant;
+        private readonly AppData _appData;
 
-        public SettingPage()
+        public SettingPage(AppData appData)
         {
             InitializeComponent();
+
+            _appData = appData;
+            _manager = new Manager(1, "Bob");
+            _consultant = new Consultant(2, "Greg");
 
             UserTypeComboBox.ItemsSource = Enum.GetValues(typeof(Role));
             UserTypeComboBox.SelectedValue = Role.Consultant;
@@ -35,7 +29,16 @@ namespace ClientWFP
             if(UserTypeComboBox.SelectedItem != null)
             {
                 Role selectedRole = (Role)UserTypeComboBox.SelectedItem;
-                RoleSelected?.Invoke(selectedRole);
+
+                switch (selectedRole)
+                {
+                    case Role.Manager:
+                        _appData.ChangeUser(_manager);
+                        break;
+                    case Role.Consultant:
+                        _appData.ChangeUser(_consultant);
+                        break;
+                }
             }
         }
     }

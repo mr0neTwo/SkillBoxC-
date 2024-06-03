@@ -1,20 +1,32 @@
-﻿using Database;
+﻿using ClientWFP.Users;
+using Database;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClientWFP
 {
     /// <summary>
     /// Interaction logic for CreateClientWindow.xaml
     /// </summary>
-    public partial class CreateClientWindow : Window
+    public partial class ClientDataWindow : Window
     {
         public Client Client { get => GetClient(); set => SetClient(value); }
 
         private Client _client;
 
-        public CreateClientWindow()
+        public ClientDataWindow()
         {
             InitializeComponent();
+        }
+
+        public void EnableFieldByPermissions(Permissions permissions)
+        {
+            FirstNameTextBox.IsEnabled = permissions.Has(Permission.CanEditClientName);
+            LastNameTextBox.IsEnabled = permissions.Has(Permission.CanEditClientName);
+            ThirdNameTextBox.IsEnabled = permissions.Has(Permission.CanEditClientName); ;
+            PhoneNumberTextBox.IsEnabled = permissions.Has(Permission.CanEditClientPhone);
+            PassportNumberTextBox.IsEnabled = permissions.Has(Permission.CanEditClientPasswordNumber);
         }
 
         private void SetClient(Client client)
@@ -40,14 +52,35 @@ namespace ClientWFP
 
         private void OnOkButtonClicked(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            if (ValidateForm())
+            {
+                DialogResult = true;
+                Close();
+            }
         }
 
         private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
             Close();
+        }
+
+        private bool ValidateForm()
+        {
+            bool isValid = ValidateTextBox(FirstNameTextBox, FirstNameTextBlock);
+            isValid &= ValidateTextBox(LastNameTextBox, LastNameTextBlock);
+            isValid &= ValidateTextBox(ThirdNameTextBox, ThirdNameTextBlock);
+            isValid &= ValidateTextBox(PassportNumberTextBox, PasswordNumberTextBlock);
+
+            return isValid;
+        }
+
+        private bool ValidateTextBox(TextBox text, TextBlock textBlock)
+        {
+            bool isValid = !string.IsNullOrEmpty(text.Text);
+            textBlock.Foreground = isValid ? Brushes.Black : Brushes.Red;
+            
+            return isValid;
         }
     }
 }

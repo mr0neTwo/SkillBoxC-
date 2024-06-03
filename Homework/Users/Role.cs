@@ -1,4 +1,4 @@
-﻿namespace ClientWFP
+﻿namespace ClientWFP.Users
 {
     public enum Role
     {
