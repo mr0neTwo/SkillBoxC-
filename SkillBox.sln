@@ -47,6 +47,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Homework10\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientWFP", "Homework\ClientWFP.csproj", "{1F17CCCC-F457-4644-BFBE-07D53C91B603}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework12", "Homework12", "{6DD84CD7-82DE-435C-8D51-B4707117AC54}"
+	ProjectSection(SolutionItems) = preProject
+		Homework\clients.xml = Homework\clients.xml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem", "BankSystem\BankSystem.csproj", "{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +124,10 @@ Global
 		{1F17CCCC-F457-4644-BFBE-07D53C91B603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F17CCCC-F457-4644-BFBE-07D53C91B603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F17CCCC-F457-4644-BFBE-07D53C91B603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,6 +145,7 @@ Global
 		{D838C075-7E83-4A3D-A601-F2208A64ACDA} = {82AF3972-9365-4571-BE0E-874055E317BC}
 		{88680159-375E-4367-B49C-9330B602BBD3} = {3CF5AD4B-423D-4BDF-9F50-728651B8D9F3}
 		{1F17CCCC-F457-4644-BFBE-07D53C91B603} = {3CF5AD4B-423D-4BDF-9F50-728651B8D9F3}
+		{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507} = {6DD84CD7-82DE-435C-8D51-B4707117AC54}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC5F1EAA-0193-42D5-B7D3-C529CE783D36}

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Serialization;
 using Utilites;
 
-namespace Database
+namespace Database.Tables
 {
     public abstract class DatabaseTable<T> where T : IDatabaseTable
     {

@@ -1,4 +1,4 @@
-﻿using Database;
+﻿using Database.DataStruct;
 using System.Windows;
 using System.Windows.Controls;
 

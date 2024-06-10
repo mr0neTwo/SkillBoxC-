@@ -6,9 +6,9 @@
     <LastName>Baratheon</LastName>
     <ThirdName>Deer</ThirdName>
     <PhoneNumber>+7(900)111-33-24</PhoneNumber>
-    <PassportNumber>** ** ******</PassportNumber>
+    <PassportNumber>74 34 732837</PassportNumber>
     <CreatedAt>1716932465</CreatedAt>
-    <UpdatedAt>1717364595</UpdatedAt>
+    <UpdatedAt>1717408402</UpdatedAt>
     <CreatedBy>1</CreatedBy>
     <UpdatedBy>1</UpdatedBy>
   </Client>
@@ -30,11 +30,11 @@
     <LastName>Lannister</LastName>
     <ThirdName>Lion</ThirdName>
     <PhoneNumber>+7(900)123-45-68</PhoneNumber>
-    <PassportNumber>** ** ******</PassportNumber>
+    <PassportNumber>14 35 447844</PassportNumber>
     <CreatedAt>1716932465</CreatedAt>
-    <UpdatedAt>1717364563</UpdatedAt>
+    <UpdatedAt>1717408384</UpdatedAt>
     <CreatedBy>1</CreatedBy>
-    <UpdatedBy>2</UpdatedBy>
+    <UpdatedBy>1</UpdatedBy>
   </Client>
   <Client>
     <Id>4</Id>

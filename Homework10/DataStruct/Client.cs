@@ -1,4 +1,4 @@
-﻿namespace Database
+﻿namespace Database.DataStruct
 {
     public struct Client : IDatabaseTable
     {
@@ -12,6 +12,8 @@
         public long UpdatedAt { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
+
+        public readonly string FullName => $"{FirstName} {LastName}";
 
     }
 }

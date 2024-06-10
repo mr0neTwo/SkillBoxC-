@@ -1,5 +1,6 @@
 ﻿using ClientWFP.Users;
 using Database;
+using Database.DataStruct;
 using System.Text.RegularExpressions;
 
 namespace ClientWFP

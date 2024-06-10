@@ -1,8 +1,10 @@
-﻿namespace Database
+﻿using Database.DataStruct;
+
+namespace Database.Tables
 {
     public class Clients : DatabaseTable<Client>
     {
-        public override string DataPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../clients.xml");
+        public override string DataPath => Path.Combine(DataBase.RootDataFolder, "clients.xml");
 
         public Client[] Find(string searchWord)
         {
@@ -31,6 +33,19 @@
             }
 
             return result.ToArray();
+        }
+
+        public Client FindById(int clientID)
+        {
+            foreach (Client client in _items)
+            {
+                if(client.Id == clientID)
+                {
+                    return client;
+                }
+            }
+
+            return new Client();
         }
     }
 }
