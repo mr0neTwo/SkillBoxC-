@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace BankSystem.ViewModels
 {
-    public class MainViewModel : ViewModel
+    public class MainViewModel : ViewModel, ITransfer<AccountWrapper<BankAccount>>
     {
         public string SearchWord 
         { 
@@ -62,6 +62,34 @@ namespace BankSystem.ViewModels
             Transactions = new ObservableCollection<Transaction>();
         }
 
+        public void Transfer(AccountWrapper<BankAccount> fromAccount, AccountWrapper<BankAccount> toAccount, float amount)
+        {
+            Transaction outcomingTransaction = new()
+            {
+                Direction = Direction.Outcoming,
+                Sum = amount,
+                AccountID = fromAccount.Id,
+                Comment = $"transfer to account #{toAccount.Id}",
+
+            };
+
+            Transaction incomingTransaction = new()
+            {
+                Direction = Direction.Incoming,
+                Sum = amount,
+                AccountID = toAccount.Id,
+                Comment = $"transfer from account #{fromAccount.Id}",
+
+            };
+
+            DataProvider.AddTransaction(outcomingTransaction);
+            DataProvider.AddTransaction(incomingTransaction);
+
+            UpdateAccountBalance(fromAccount.Id);
+            UpdateAccountBalance(toAccount.Id);
+        }
+
+
         private void SelectClient(object obj)
         {
             if (obj is Client selectedClient)
@@ -113,26 +141,27 @@ namespace BankSystem.ViewModels
             }
 
             Transaction transaction = transactionViewModel.Transaction;
+
+            if (transaction.Direction == Direction.Transfer)
+            {
+                BankAccount targetBankAccount = DataProvider.FindBankAccountById(transactionViewModel.TransferData.AccountId);
+
+                AccountWrapper<BankAccount> sourceAccountWrapper = new AccountWrapper<BankAccount>(SelectedBankAccount);
+                AccountWrapper<BankAccount> targetAccountWrapper = new AccountWrapper<BankAccount>(targetBankAccount);
+                Transfer(sourceAccountWrapper, targetAccountWrapper, transaction.Sum);
+
+                UpdateTransactionData();
+                UpdateAccountsData();
+
+                return;
+            }
+            
             transaction.AccountID = SelectedBankAccount.Id;
             DataProvider.AddTransaction(transaction);
 
-            if(transaction.Direction == Direction.Transfer)
-            {
-                Transaction transferTransaction = new()
-                {
-                    Direction = Direction.Incoming,
-                    Sum = transaction.Sum,
-                    AccountID = transactionViewModel.TransferData.AccountId,
-                    Comment = $"transfer from {SelectedClient.FullName}",
-                    
-                };
-
-                DataProvider.AddTransaction(transferTransaction);
-                UpdateOtherAccountBalance(transactionViewModel.TransferData.AccountId);
-            }
-
+            UpdateAccountBalance(SelectedBankAccount.Id);
             UpdateTransactionData();
-            UpdateAccountBalance();
+            UpdateAccountsData();
         }
 
         private bool CanAddAccount(object obj)
@@ -142,7 +171,7 @@ namespace BankSystem.ViewModels
 
         private bool CanAddTransaction(object obj)
         {
-            return SelectedBankAccount.Id != 0;
+            return SelectedBankAccount != null && SelectedBankAccount.Id != 0;
         }
 
         private void AddNewBankAccountOnDataBase(BankAccountType accountType)
@@ -192,18 +221,7 @@ namespace BankSystem.ViewModels
             }
         }
 
-        private void UpdateAccountBalance()
-        {
-            float balance = CalculateBalance(Transactions);
-
-            BankAccount bankAccount = SelectedBankAccount;
-            bankAccount.Balance = balance;
-            DataProvider.UpdateBankAccount(bankAccount);
-
-            UpdateAccountsData();
-        }
-
-        private void UpdateOtherAccountBalance(int accountId)
+        private void UpdateAccountBalance(int accountId)
         {
             Transaction[] transactions = DataProvider.FindTransactionsByAccountId(accountId);
             float balance = CalculateBalance(transactions);

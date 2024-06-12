@@ -1,6 +1,6 @@
 ﻿namespace Database.DataStruct
 {
-    public struct BankAccount : IDatabaseTable
+    public class BankAccount : IDatabaseTable
     {
         public int Id { get; set; }
         public long CreatedAt { get; set; }
@@ -12,4 +12,6 @@
         public float Balance { get; set; }
 
     }
+
+    
 }

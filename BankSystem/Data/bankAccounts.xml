@@ -3,22 +3,22 @@
   <BankAccount>
     <Id>1</Id>
     <CreatedAt>1717950139</CreatedAt>
-    <UpdatedAt>1718026593</UpdatedAt>
+    <UpdatedAt>1718184189</UpdatedAt>
     <CreatedBy>0</CreatedBy>
     <UpdatedBy>1</UpdatedBy>
     <ClientID>2</ClientID>
     <AccountType>Debit</AccountType>
-    <Balance>70</Balance>
+    <Balance>55</Balance>
   </BankAccount>
   <BankAccount>
     <Id>2</Id>
     <CreatedAt>1717950142</CreatedAt>
-    <UpdatedAt>0</UpdatedAt>
+    <UpdatedAt>1718185878</UpdatedAt>
     <CreatedBy>0</CreatedBy>
-    <UpdatedBy>0</UpdatedBy>
+    <UpdatedBy>1</UpdatedBy>
     <ClientID>2</ClientID>
     <AccountType>Credit</AccountType>
-    <Balance>0</Balance>
+    <Balance>32</Balance>
   </BankAccount>
   <BankAccount>
     <Id>3</Id>
@@ -33,12 +33,12 @@
   <BankAccount>
     <Id>4</Id>
     <CreatedAt>1717950518</CreatedAt>
-    <UpdatedAt>0</UpdatedAt>
+    <UpdatedAt>1718185878</UpdatedAt>
     <CreatedBy>0</CreatedBy>
-    <UpdatedBy>0</UpdatedBy>
+    <UpdatedBy>1</UpdatedBy>
     <ClientID>1</ClientID>
     <AccountType>Credit</AccountType>
-    <Balance>0</Balance>
+    <Balance>23</Balance>
   </BankAccount>
   <BankAccount>
     <Id>5</Id>
@@ -63,11 +63,11 @@
   <BankAccount>
     <Id>7</Id>
     <CreatedAt>1718027051</CreatedAt>
-    <UpdatedAt>0</UpdatedAt>
+    <UpdatedAt>1718184189</UpdatedAt>
     <CreatedBy>1</CreatedBy>
-    <UpdatedBy>0</UpdatedBy>
+    <UpdatedBy>1</UpdatedBy>
     <ClientID>5</ClientID>
     <AccountType>Debit</AccountType>
-    <Balance>0</Balance>
+    <Balance>10</Balance>
   </BankAccount>
 </ArrayOfBankAccount>
