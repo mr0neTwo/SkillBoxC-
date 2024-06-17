@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using BankSystem.Models;
 using System.Windows;
 
 namespace BankSystem
@@ -9,6 +8,7 @@ namespace BankSystem
     /// </summary>
     public partial class App : Application
     {
+        private Logger logger = new Logger();
     }
 
 }

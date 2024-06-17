@@ -5,8 +5,14 @@ namespace BankSystem.Models
 {
     internal static class DataProvider
     {
+        public static event Action<User, BankAccount> BankAccountCreated;
+        public static event Action<User, BankAccount> BankAccountChanged;
+        public static event Action<User, Transaction> TransactionAdded;
+
+
         private static DataBase _database = new DataBase();
-        private static int _userId = 1;
+        private static User _user = new User(1, "Aegon", "Targaryen");
+
 
         internal static Client[] GetAllClients()
         {
@@ -15,12 +21,14 @@ namespace BankSystem.Models
 
         internal static void AddTransaction(Transaction transaction)
         {
-            _database.Transactions.Add(_userId, transaction);
+            _database.Transactions.Add(_user.Id, transaction);
+            TransactionAdded?.Invoke(_user, transaction);
         }
 
         internal static void AddBankAccount(BankAccount account)
         {
-            _database.BankAccounts.Add(_userId, account);
+            _database.BankAccounts.Add(_user.Id, account);
+            BankAccountCreated?.Invoke(_user, account);
         }
 
         internal static Client[] FindClients(string searchWord)
@@ -40,7 +48,8 @@ namespace BankSystem.Models
 
         internal static void UpdateBankAccount(BankAccount bankAccount)
         {
-            _database.BankAccounts.Update(_userId, bankAccount);
+            _database.BankAccounts.Update(_user.Id, bankAccount);
+            BankAccountChanged?.Invoke(_user, bankAccount);
         }
 
         internal static BankAccount[] GetAllBankAccounts()
