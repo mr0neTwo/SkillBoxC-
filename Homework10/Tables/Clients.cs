@@ -1,4 +1,5 @@
 ﻿using Database.DataStruct;
+using Database.Exceptions;
 
 namespace Database.Tables
 {
@@ -46,6 +47,36 @@ namespace Database.Tables
             }
 
             return new Client();
+        }
+
+        public override void Add(int userId, Client client)
+        {
+            if (string.IsNullOrEmpty(client.FirstName))
+            {
+                throw new MissingRequiredFieldsException("FirstName");
+            }
+
+            if (string.IsNullOrEmpty(client.LastName))
+            {
+                throw new MissingRequiredFieldsException("LastName");
+            }
+
+            base.Add(userId, client);
+        }
+
+        public override void Update(int userId, Client client)
+        {
+            if (string.IsNullOrEmpty(client.FirstName))
+            {
+                throw new MissingRequiredFieldsException("FirstName");
+            }
+
+            if (string.IsNullOrEmpty(client.LastName))
+            {
+                throw new MissingRequiredFieldsException("LastName");
+            }
+
+            base.Update(userId, client);
         }
     }
 }

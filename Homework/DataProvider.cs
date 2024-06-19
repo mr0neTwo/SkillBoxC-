@@ -1,7 +1,9 @@
 ﻿using ClientWFP.Users;
 using Database;
 using Database.DataStruct;
+using Database.Exceptions;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace ClientWFP
 
@@ -29,10 +31,25 @@ namespace ClientWFP
 
         public void AddClients(Client client)
         {
-            if(_user.Permissions.Has(Permission.CanAddClient))
+            if(!_user.Permissions.Has(Permission.CanAddClient))
+            {
+                return;
+            }
+
+            try
             {
                 _database.Clients.Add(_user.Id, client);
             }
+            catch (InvalidUserIdException)
+            {
+                MessageBox.Show("Please log in to continue working");
+            }
+            catch (MissingRequiredFieldsException exception) 
+            {
+                MessageBox.Show(exception.Message);
+            }
+
+           
         }
 
         public void RemoveClients(Client client)
@@ -83,9 +100,22 @@ namespace ClientWFP
 
         internal void UpdateClientData(Client newClient)
         {
-            if (_user.Permissions.Has(Permission.CanEditClient))
+            if (!_user.Permissions.Has(Permission.CanEditClient))
+            {
+                return;
+            }
+
+            try
             {
                 _database.Clients.Update(_user.Id, newClient);
+            }
+            catch (InvalidUserIdException)
+            {
+                MessageBox.Show("Please log in to continue working");
+            }
+            catch (MissingRequiredFieldsException exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
 

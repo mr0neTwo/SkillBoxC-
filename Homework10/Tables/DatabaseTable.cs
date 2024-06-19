@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using Database.Exceptions;
+using System.Xml.Serialization;
 using Utilites;
 
 namespace Database.Tables
@@ -18,8 +19,13 @@ namespace Database.Tables
             LoadCurrentId();
         }
 
-        public void Add(int userId, T item)
+        public virtual void Add(int userId, T item)
         {
+            if (CheckUserId(userId))
+            {
+                throw new InvalidUserIdException();
+            }
+
             item.Id = ++_currentId;
             item.CreatedAt = Utils.DateTimeToUnixTimestamp(DateTime.Now);
             item.CreatedBy = userId;
@@ -41,8 +47,13 @@ namespace Database.Tables
         }
 
 
-        public void Update(int userId, T item)
+        public virtual void Update(int userId, T item)
         {
+            if (CheckUserId(userId))
+            {
+                throw new InvalidUserIdException();
+            }
+
             for (int i = 0; i < _items.Count; i++)
             {
                 if (_items[i].Id == item.Id)
@@ -94,6 +105,11 @@ namespace Database.Tables
             }
 
             _currentId = _items.Select(item => item.Id).Max();
+        }
+
+        private static bool CheckUserId(int userId)
+        {
+            return userId <= 0;
         }
     }
 }

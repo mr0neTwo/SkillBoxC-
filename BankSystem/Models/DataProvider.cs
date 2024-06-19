@@ -1,5 +1,7 @@
 ﻿using Database;
 using Database.DataStruct;
+using Database.Exceptions;
+using System.Windows;
 
 namespace BankSystem.Models
 {
@@ -21,14 +23,34 @@ namespace BankSystem.Models
 
         internal static void AddTransaction(Transaction transaction)
         {
-            _database.Transactions.Add(_user.Id, transaction);
-            TransactionAdded?.Invoke(_user, transaction);
+            try
+            {
+                _database.Transactions.Add(_user.Id, transaction);
+                TransactionAdded?.Invoke(_user, transaction);
+            } 
+            catch (InvalidUserIdException)
+            {
+                OfferToLogin();
+            }
+            catch (MissingRequiredFieldsException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
+        
         internal static void AddBankAccount(BankAccount account)
         {
-            _database.BankAccounts.Add(_user.Id, account);
-            BankAccountCreated?.Invoke(_user, account);
+            try
+            {
+                _database.BankAccounts.Add(_user.Id, account);
+                BankAccountCreated?.Invoke(_user, account);
+            }
+            catch (InvalidUserIdException)
+            {
+                OfferToLogin();
+            }
+
         }
 
         internal static Client[] FindClients(string searchWord)
@@ -48,8 +70,15 @@ namespace BankSystem.Models
 
         internal static void UpdateBankAccount(BankAccount bankAccount)
         {
-            _database.BankAccounts.Update(_user.Id, bankAccount);
-            BankAccountChanged?.Invoke(_user, bankAccount);
+            try
+            {
+                _database.BankAccounts.Update(_user.Id, bankAccount);
+                BankAccountChanged?.Invoke(_user, bankAccount);
+            }
+            catch (InvalidUserIdException)
+            {
+                OfferToLogin();
+            }
         }
 
         internal static BankAccount[] GetAllBankAccounts()
@@ -65,6 +94,11 @@ namespace BankSystem.Models
         internal static BankAccount FindBankAccountById(int accountId)
         {
             return _database.BankAccounts.FindById(accountId);
+        }
+
+        private static void OfferToLogin()
+        {
+            MessageBox.Show("Please log in to continue working");
         }
     }
 }

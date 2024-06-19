@@ -1,4 +1,5 @@
 ﻿using Database.DataStruct;
+using Database.Exceptions;
 
 namespace Database.Tables
 {
@@ -19,6 +20,16 @@ namespace Database.Tables
             }
 
             return transactions.ToArray();
+        }
+
+        public override void Add(int userId, Transaction transaction)
+        {
+            if(transaction.Sum == 0)
+            {
+                throw new MissingRequiredFieldsException("Sum");
+            }
+
+            base.Add(userId, transaction);
         }
     }
 }
