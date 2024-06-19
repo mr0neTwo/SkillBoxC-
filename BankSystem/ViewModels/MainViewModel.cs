@@ -1,5 +1,6 @@
 ﻿using BankSystem.Models;
 using BankSystem.Views;
+using BankSystemLogic.Models;
 using Database.DataStruct;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

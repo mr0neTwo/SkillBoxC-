@@ -285,4 +285,17 @@
     <DestinationAccountID>0</DestinationAccountID>
     <Comment>transfer from account #8</Comment>
   </Transaction>
+  <Transaction>
+    <Id>23</Id>
+    <CreatedAt>1718798511</CreatedAt>
+    <UpdatedAt>0</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>0</UpdatedBy>
+    <Direction>Incoming</Direction>
+    <Sum>1000</Sum>
+    <AccountID>11</AccountID>
+    <SourceAccountID>0</SourceAccountID>
+    <DestinationAccountID>0</DestinationAccountID>
+    <Comment>Lotery</Comment>
+  </Transaction>
 </ArrayOfTransaction>

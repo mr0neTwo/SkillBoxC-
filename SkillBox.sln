@@ -48,9 +48,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientWFP", "Homework\ClientWFP.csproj", "{1F17CCCC-F457-4644-BFBE-07D53C91B603}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework12", "Homework12", "{6DD84CD7-82DE-435C-8D51-B4707117AC54}"
-	ProjectSection(SolutionItems) = preProject
-		Homework\clients.xml = Homework\clients.xml
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem", "BankSystem\BankSystem.csproj", "{FFD3958A-A35F-4EFA-BAAE-DA2E6248E507}"
 EndProject

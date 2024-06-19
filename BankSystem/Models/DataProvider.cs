@@ -2,6 +2,7 @@
 using Database.DataStruct;
 using Database.Exceptions;
 using System.Windows;
+using BankSystemLogic.Models;
 
 namespace BankSystem.Models
 {

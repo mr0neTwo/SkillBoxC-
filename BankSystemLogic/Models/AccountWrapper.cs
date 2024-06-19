@@ -1,6 +1,6 @@
 ﻿using Database.DataStruct;
 
-namespace BankSystem.Models
+namespace BankSystemLogic.Models
 {
     public class AccountWrapper<T>: IAccount<T> where T: BankAccount
     {

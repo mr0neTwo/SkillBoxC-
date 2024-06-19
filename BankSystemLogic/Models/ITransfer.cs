@@ -1,6 +1,6 @@
 ﻿using Database.DataStruct;
 
-namespace BankSystem.Models
+namespace BankSystemLogic.Models
 {
     public interface ITransfer<in T> where T : AccountWrapper<BankAccount>
     {

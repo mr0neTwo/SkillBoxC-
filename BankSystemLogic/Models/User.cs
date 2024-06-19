@@ -1,6 +1,6 @@
-﻿namespace BankSystem.Models
+﻿namespace BankSystemLogic.Models
 {
-    internal struct User
+    public struct User
     {
         public int Id { get; }
         public string FirstName { get; }

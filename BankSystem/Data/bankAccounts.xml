@@ -100,4 +100,14 @@
     <AccountType>Debit</AccountType>
     <Balance>0</Balance>
   </BankAccount>
+  <BankAccount>
+    <Id>11</Id>
+    <CreatedAt>1718798493</CreatedAt>
+    <UpdatedAt>1718798511</UpdatedAt>
+    <CreatedBy>1</CreatedBy>
+    <UpdatedBy>1</UpdatedBy>
+    <ClientID>3</ClientID>
+    <AccountType>Debit</AccountType>
+    <Balance>1000</Balance>
+  </BankAccount>
 </ArrayOfBankAccount>

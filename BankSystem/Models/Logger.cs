@@ -1,4 +1,5 @@
-﻿using Database.DataStruct;
+﻿using BankSystemLogic.Models;
+using Database.DataStruct;
 using System.IO;
 
 namespace BankSystem.Models
@@ -14,6 +15,12 @@ namespace BankSystem.Models
             DataProvider.TransactionAdded += OnTransactionAdded;
         }
 
+        private void OnBankAccountChanged(User user, BankAccount account)
+        {
+            string log = $"Account {account.Id} modified by {user.FullName}";
+            AddLog(log);
+        }
+
         private void OnTransactionAdded(User user, Transaction transaction)
         {
             string log = $"New {transaction.Direction} transaction. Amount: {transaction.Sum} Account number: {transaction.AccountID}. Crated by {user.FullName}";
@@ -23,12 +30,6 @@ namespace BankSystem.Models
         private void OnBankAccountCreated(User user, BankAccount account)
         {
             string log = $"New account {account.Id} Crated by {user.FullName}";
-            AddLog(log);
-        }
-
-        private void OnBankAccountChanged(User user, BankAccount account)
-        {
-            string log = $"Account {account.Id} modified by {user.FullName}";
             AddLog(log);
         }
 
