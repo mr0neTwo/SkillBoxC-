@@ -1,0 +1,87 @@
+﻿<Window x:Class="ElectronicShop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:ElectronicShop.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+
+    <Window.DataContext>
+        <vm:MainModelView />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            
+            <Button 
+                Content="Add client"
+                Margin="10 4"
+                Width="100"
+                Command="{Binding AddNewClientCommand}"
+                />
+
+            <Button 
+                Content="Remove all"
+                Margin="10 4"
+                Width="100"
+                Command="{Binding RemoveAllClientCommand}"
+                />
+        </StackPanel>
+        
+        <StackPanel 
+            Grid.Row="2"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            
+            <Button 
+                 Content="Add order"
+                 Margin="10 4"
+                 Width="100"
+                 Command="{Binding AddNewOrderCommand}"
+                 />
+
+            <Button 
+                 Content="Remove all"
+                 Margin="10 4"
+                 Width="100"
+                 Command="{Binding RemoveAllOrdersCommand}"
+                 />
+            
+        </StackPanel>
+
+        <DataGrid 
+            Grid.Row="1" 
+            ItemsSource="{Binding ClientTable}" 
+            IsReadOnly="True"
+            AutoGenerateColumns="True"
+            BindingGroup="{Binding SelectClientCommand}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction 
+                        Command="{Binding DataContext.SelectClientCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        
+        <DataGrid
+            Grid.Row="3" 
+            ItemsSource="{Binding OrdersTable}" 
+            IsReadOnly="True"
+            AutoGenerateColumns="True"/>
+
+
+    </Grid>
+</Window>
