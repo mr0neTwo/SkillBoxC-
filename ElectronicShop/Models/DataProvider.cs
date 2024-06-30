@@ -1,35 +1,60 @@
 ﻿using DataBaseADO;
-using System.Data;
 
 namespace ElectronicShop.Models
 {
     public sealed class DataProvider
     {
-        private readonly Database _database = new();
+        private readonly Database _database;
 
-        public DataTable GetAllClients()
+        public DataProvider()
         {
-            return _database.GetClientsTable();
+            _database = new Database();
+            _database.RestoreDefaultTables();
         }
 
-        public DataTable GetOrders()
+        public Client[] GetAllClients()
         {
-            return _database.GetOrdersTable();
+            return _database.GetAllClients();
         }
-        
-        public DataTable GetData()
+
+        public Order[] GetOrders(string email)
         {
-            DataTable table = new ();
-            table.Columns.Add("ID", typeof(int));
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("Email", typeof(string));
+            return _database.GetOrders(email);
+        }
 
-            // Заполнение примерами данных
-            table.Rows.Add(1, "Alice", "alice@example.com");
-            table.Rows.Add(2, "Bob", "bob@example.com");
-            table.Rows.Add(3, "Charlie", "charlie@example.com");
+        public void AddClient(Client client)
+        {
+            _database.AddClient(client);
+        }
 
-            return table;
+        public void UpdateClient(Client client)
+        {
+            _database.UpdateClient(client);
+        }
+
+        public void RemoveClient(Client client)
+        {
+            _database.RemoveClient(client);
+        }
+
+        public void RemoveAllClients()
+        {
+            _database.RemoveAllClients();
+        }
+
+        public void AddOrder(Order order)
+        {
+            _database.AddOrder(order);
+        }
+
+        public void RemoveOrder(Order order)
+        {
+            _database.RemoveOrder(order);
+        }
+
+        public void RemoveAllOrder(string email)
+        {
+            _database.RemoveAllOrders(email);
         }
     }
 }

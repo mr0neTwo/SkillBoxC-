@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
 using Npgsql;
 
 namespace DataBaseADO.DataSources;
@@ -14,6 +16,8 @@ internal sealed class PostgresSource : DataSource<NpgsqlConnection, NpgsqlComman
 				connection.Open();
 				NpgsqlTransaction transaction = connection.BeginTransaction();
 				AddOrder(connection, transaction, order);
+				transaction.Commit();
+				Console.WriteLine($"Order {order.ProductName} added");
 			}
 			catch (Exception e)
 			{
@@ -76,16 +80,81 @@ internal sealed class PostgresSource : DataSource<NpgsqlConnection, NpgsqlComman
 			}
 		}
 	}
-	
+
+	public Order[] GetOrders(string email)
+	{
+		List<Order> orders = new();
+		DataTable orderTable = new();
+		
+		using (NpgsqlConnection connection = new(ConnectionString))
+		{
+			connection.Open();
+			
+			using (NpgsqlCommand command = new(Query.GetOrdersByEmail, connection))
+			{
+				command.Parameters.AddWithValue("@Email", email);
+				
+				
+				using (NpgsqlDataAdapter dataAdapter = new(command))
+				{
+					dataAdapter.Fill(orderTable);
+				}
+			}
+		}
+
+		foreach (DataRow dataRow in orderTable.Rows)
+		{
+			Order order = new()
+			{
+				Id = (int)dataRow["Id"],
+				Email = dataRow["Email"].ToString(),
+				ProductCode = (int)dataRow["ProductCode"],
+				ProductName = dataRow["ProductName"].ToString()
+			};
+			
+			orders.Add(order);
+		}
+
+		return orders.ToArray();
+	}
+
 	private static void AddOrder(NpgsqlConnection connection, NpgsqlTransaction transaction, Order order)
 	{
 		using (NpgsqlCommand command = new(Query.InsertOrder, connection, transaction))
 		{
 			command.Parameters.AddWithValue("@ProductCode", order.ProductCode);
-			command.Parameters.AddWithValue("@ProductName", order.ProductName);
+			command.Parameters.AddWithValue("@ProductName", order.ProductName ?? string.Empty);
 			command.Parameters.AddWithValue("@Email", order.Email);
 
 			command.ExecuteNonQuery();
+		}
+	}
+
+	public void RemoveOrder(Order order)
+	{
+		using (NpgsqlConnection connection = new(ConnectionString))
+		{
+			connection.Open();
+			
+			using (NpgsqlCommand command = new(Query.DeleteOrder, connection))
+			{
+				command.Parameters.AddWithValue("@Id", order.Id);
+				command.ExecuteNonQuery();
+			}
+		}
+	}
+
+	public void RemoveAllOrders(string email)
+	{
+		using (NpgsqlConnection connection = new(ConnectionString))
+		{
+			connection.Open();
+			
+			using (NpgsqlCommand command = new(Query.DeleteAllOrder, connection))
+			{
+				command.Parameters.AddWithValue("@Email", email);
+				command.ExecuteNonQuery();
+			}
 		}
 	}
 }

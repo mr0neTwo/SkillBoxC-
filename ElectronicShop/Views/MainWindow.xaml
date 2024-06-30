@@ -30,14 +30,31 @@
                 Margin="10 4"
                 Width="100"
                 Command="{Binding AddNewClientCommand}"
-                />
+            />
+            
+            <Button 
+                Content="Edit client"
+                Margin="10 4"
+                Width="100"
+                Command="{Binding EditClientCommand}"
+                IsEnabled="{Binding IsClientSelected}"
+            />
+            
+            <Button 
+                Content="Remove client"
+                Margin="10 4"
+                Width="100"
+                Command="{Binding RemoveClientCommand}"
+                IsEnabled="{Binding IsClientSelected}"
+            />
 
             <Button 
                 Content="Remove all"
                 Margin="10 4"
                 Width="100"
                 Command="{Binding RemoveAllClientCommand}"
-                />
+            />
+            
         </StackPanel>
         
         <StackPanel 
@@ -50,23 +67,33 @@
                  Margin="10 4"
                  Width="100"
                  Command="{Binding AddNewOrderCommand}"
-                 />
+                 IsEnabled="{Binding IsClientSelected}"
+            />
+            
+            <Button 
+                Content="Remove order"
+                Margin="10 4"
+                Width="100"
+                Command="{Binding RemoveOrderCommand}"
+                IsEnabled="{Binding IsOrderSelected}"
+            />
 
             <Button 
                  Content="Remove all"
                  Margin="10 4"
                  Width="100"
                  Command="{Binding RemoveAllOrdersCommand}"
-                 />
+                 IsEnabled="{Binding IsClientSelected}"
+            />
             
         </StackPanel>
 
         <DataGrid 
             Grid.Row="1" 
-            ItemsSource="{Binding ClientTable}" 
+            ItemsSource="{Binding Clients}" 
             IsReadOnly="True"
             AutoGenerateColumns="True"
-            BindingGroup="{Binding SelectClientCommand}">
+        >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction 
@@ -78,9 +105,18 @@
         
         <DataGrid
             Grid.Row="3" 
-            ItemsSource="{Binding OrdersTable}" 
+            ItemsSource="{Binding Orders}" 
             IsReadOnly="True"
-            AutoGenerateColumns="True"/>
+            AutoGenerateColumns="True"
+        >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction 
+                        Command="{Binding DataContext.SelectOrderCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                        CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
 
 
     </Grid>

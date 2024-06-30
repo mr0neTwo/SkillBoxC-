@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace DataBaseADO.DataSources;
@@ -14,6 +16,8 @@ internal sealed class MsSqlSource : DataSource<SqlConnection, SqlCommand, SqlDat
 				connection.Open();
 				SqlTransaction transaction = connection.BeginTransaction();
 				AddClient(connection, transaction, client);
+				transaction.Commit();
+				Console.WriteLine($"Client {client.FirstName} added");
 			}
 			catch (Exception e)
 			{
@@ -22,6 +26,29 @@ internal sealed class MsSqlSource : DataSource<SqlConnection, SqlCommand, SqlDat
 				throw;
 			}
 		}
+	}
+
+	public Client[] GetAllClients()
+	{
+		DataTable clientTable = GetDataTable(Query.GetAllClients);
+		List<Client> clients = new();
+
+		foreach (DataRow row in clientTable.Rows)
+		{
+			Client client = new()
+			{
+				Id = (int)row["Id"],
+				FirstName = row["FirstName"].ToString(),
+				LastName = row["LastName"].ToString(),
+				ThirdName = row["ThirdName"].ToString(),
+				PhoneNumber = row["PhoneNumber"].ToString(),
+				Email = row["Email"].ToString(),
+			};
+			
+			clients.Add(client);
+		}
+
+		return clients.ToArray();
 	}
 
 	public void UpdateClient(Client client)
@@ -34,7 +61,7 @@ internal sealed class MsSqlSource : DataSource<SqlConnection, SqlCommand, SqlDat
 			{
 				command.Parameters.AddWithValue("@Id", client.Id);
 				command.Parameters.AddWithValue("@FirstName", client.FirstName);
-				command.Parameters.AddWithValue("@LastName", client.SecondName);
+				command.Parameters.AddWithValue("@LastName", client.LastName);
 				command.Parameters.AddWithValue("@ThirdName", client.ThirdName);
 				command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
 				command.Parameters.AddWithValue("@Email", client.Email);
@@ -96,13 +123,41 @@ internal sealed class MsSqlSource : DataSource<SqlConnection, SqlCommand, SqlDat
 	{
 		using (SqlCommand command = new(Query.InsertClient, connection, transaction))
 		{
-			command.Parameters.AddWithValue("@FirstName", client.FirstName);
-			command.Parameters.AddWithValue("@LastName", client.SecondName);
-			command.Parameters.AddWithValue("@ThirdName", client.ThirdName);
-			command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
+			command.Parameters.AddWithValue("@FirstName", client.FirstName ?? string.Empty);
+			command.Parameters.AddWithValue("@LastName", client.LastName ?? string.Empty);
+			command.Parameters.AddWithValue("@ThirdName", client.ThirdName ?? string.Empty);
+			command.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber ?? string.Empty);
 			command.Parameters.AddWithValue("@Email", client.Email);
 
 			command.ExecuteNonQuery();
+		}
+	}
+
+	public void RemoveClient(Client client)
+	{
+		using (SqlConnection connection = new(ConnectionString))
+		{
+			connection.Open();
+			
+			using (SqlCommand command = new(Query.DeleteClient, connection))
+			{
+				command.Parameters.AddWithValue("@Id", client.Id);
+				
+				command.ExecuteNonQuery();
+			}
+		}
+	}
+
+	public void RemoveAllClients()
+	{
+		using (SqlConnection connection = new(ConnectionString))
+		{
+			connection.Open();
+			
+			using (SqlCommand command = new(Query.DeleteAllClient, connection))
+			{
+				command.ExecuteNonQuery();
+			}
 		}
 	}
 }
