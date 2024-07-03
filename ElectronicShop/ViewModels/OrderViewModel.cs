@@ -1,9 +1,9 @@
 using System.Windows;
-using DataBaseADO;
+using DatabaseEF.Entities;
 
 namespace ElectronicShop.ViewModels
 {
-	internal class OrderViewModel : ViewModel
+	internal sealed class OrderViewModel : ViewModel
 	{
 		public string ProductName
 		{

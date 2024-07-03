@@ -16,27 +16,7 @@ namespace TestADO
 		// 	optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
 		// }
 
-		public void AddCostumer()
-		{
-			using (MyDbContext db = new MyDbContext())
-			{
-				Customer customer = new Customer { Name = "John Smith" };
-				db.Customers.Add(customer);
-				db.SaveChanges();
-			}
-			
-			using (var db = new MyDbContext())
-			{
-				IQueryable<Order> orders = from o in db.Orders
-										   where o.Customer.Name == "John Smith"
-										   select o;
-			}
-			
-			using (var db = new MyDbContext())
-			{
-				var result = db.Database.ExecuteSqlCommand("EXEC MyStoredProcedure @p0, @p1", parameters: new[] { "value1", "value2" });
-			}
-		}
+		
 		
 		public static class PasswordHasher
 		{

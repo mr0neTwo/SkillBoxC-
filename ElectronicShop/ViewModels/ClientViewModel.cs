@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Media;
-using DataBaseADO;
+using DatabaseEF.Entities;
 
 namespace ElectronicShop.ViewModels
 {
@@ -83,7 +83,7 @@ namespace ElectronicShop.ViewModels
 			}
 		}
 
-		private Client _client;
+		private Client _client = new();
 		private Brush _emailBorderBrush = Brushes.DarkGray;
 
 		private void Save(object obj)

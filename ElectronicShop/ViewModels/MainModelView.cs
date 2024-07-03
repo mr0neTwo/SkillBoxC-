@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ElectronicShop.Models;
 using System.Windows.Input;
-using DataBaseADO;
+using DatabaseEF.Entities;
 using ElectronicShop.Views;
 
 namespace ElectronicShop.ViewModels
@@ -37,7 +37,7 @@ namespace ElectronicShop.ViewModels
             set
             {
                 _client = value;
-                IsClientSelected = _client.Id != 0;
+                IsClientSelected = _client != null;
             }
         }
         
@@ -47,7 +47,7 @@ namespace ElectronicShop.ViewModels
             set
             {
                 _order = value;
-                IsOrderSelected = _order.Id != 0;
+                IsOrderSelected = _order != null;
             }
         }
 
@@ -180,7 +180,7 @@ namespace ElectronicShop.ViewModels
                 return;
             }
 
-            Order order = new() { Email = SelectedClient.Email };
+            Order order = new() { ClientId = SelectedClient.Id };
             orderViewModel.Order = order;
 
             bool? result = orderWindow.ShowDialog();
@@ -208,20 +208,20 @@ namespace ElectronicShop.ViewModels
 
         private void RemoveAllOrders(object obj)
         {
-            if (string.IsNullOrEmpty(SelectedClient.Email))
+            if (SelectedClient == null)
             {
                 return;
             }
             
-            _dataProvider.RemoveAllOrder(SelectedClient.Email);
+            _dataProvider.RemoveAllOrder(SelectedClient.Id);
             UpdateOrders();
         }
 
         private void UpdateClients()
         {
-            SelectedClient = default;
-            Client[] clients = _dataProvider.GetAllClients();
+            SelectedClient = null;
             Clients.Clear();
+            Client[] clients = _dataProvider.GetAllClients();
 
             foreach (Client client in clients)
             {
@@ -234,14 +234,12 @@ namespace ElectronicShop.ViewModels
             SelectedOrder = default;
             Orders.Clear();
             
-            if (string.IsNullOrEmpty(SelectedClient.Email))
+            if (SelectedClient == null || SelectedClient.Orders.Count == 0)
             {
                 return;
             }
-
-            Order[] orders = _dataProvider.GetOrders(SelectedClient.Email);
             
-            foreach (Order order in orders)
+            foreach (Order order in SelectedClient.Orders)
             {
                 Orders.Add(order);
             }
