@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace ElectronicShop.ViewModels;
+namespace ZooRepositoryView.ViewModels;
 
 public sealed class DelegateCommand : ICommand
 {

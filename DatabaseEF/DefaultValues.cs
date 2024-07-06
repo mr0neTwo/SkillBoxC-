@@ -38,4 +38,28 @@ public static class DefaultValues
 		new() { FirstName = "Frank", LastName = "Johnson", ThirdName = "Henry", PhoneNumber = "+7 (678) 901-23-45", Email = "frank@example.com" },
 		new() { FirstName = "Hannah", LastName = "Wilson", ThirdName = "Elizabeth", PhoneNumber = "+7 (789) 012-34-56", Email = "hannah@example.com" }
 	};
+	
+	public static readonly Animal[] Animals =
+	{
+		new() { Name = "Elephant", Age = 10, Weight = 5000, AnimalType = AnimalType.Mammal },
+		new() { Name = "Tiger", Age = 5, Weight = 300, AnimalType = AnimalType.Mammal },
+		new() { Name = "Parrot", Age = 2, Weight = 1, AnimalType = AnimalType.Bird },
+		new() { Name = "Frog", Age = 1, Weight = 0.5f, AnimalType = AnimalType.Amphibian },
+		new() { Name = "Penguin", Age = 4, Weight = 15, AnimalType = AnimalType.Bird },
+		new() { Name = "Lion", Age = 8, Weight = 250, AnimalType = AnimalType.Mammal },
+		new() { Name = "Dolphin", Age = 12, Weight = 400, AnimalType = AnimalType.Mammal },
+		new() { Name = "Eagle", Age = 6, Weight = 7, AnimalType = AnimalType.Bird },
+		new() { Name = "Shark", Age = 20, Weight = 800, AnimalType = AnimalType.Mammal },
+		new() { Name = "Rabbit", Age = 3, Weight = 2, AnimalType = AnimalType.Mammal },
+		new() { Name = "Hawk", Age = 5, Weight = 6, AnimalType = AnimalType.Bird },
+		new() { Name = "Salamander", Age = 4, Weight = 1, AnimalType = AnimalType.Amphibian },
+		new() { Name = "Whale", Age = 25, Weight = 15000, AnimalType = AnimalType.Mammal },
+		new() { Name = "Pigeon", Age = 2, Weight = 0.3f, AnimalType = AnimalType.Bird },
+		new() { Name = "Koala", Age = 7, Weight = 10, AnimalType = AnimalType.Mammal },
+		new() { Name = "Turtle", Age = 50, Weight = 300, AnimalType = AnimalType.Amphibian },
+		new() { Name = "Gecko", Age = 3, Weight = 0.1f, AnimalType = AnimalType.Amphibian },
+		new() { Name = "Otter", Age = 6, Weight = 12, AnimalType = AnimalType.Mammal },
+		new() { Name = "Owl", Age = 3, Weight = 1.5f, AnimalType = AnimalType.Bird },
+		new() { Name = "Toad", Age = 2, Weight = 0.8f, AnimalType = AnimalType.Amphibian }
+	};
 }

@@ -9,6 +9,7 @@ public sealed class DatabaseContext : DbContext
 {
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<Order> Orders { get; set; }
+	public DbSet<Animal> Animals { get; set; }
 	
 	public DatabaseContext()
 	{
@@ -35,6 +36,7 @@ public sealed class DatabaseContext : DbContext
 	{
 		modelBuilder.ApplyConfiguration(new ClientConfiguration());
 		modelBuilder.ApplyConfiguration(new OrderConfiguration());
+		modelBuilder.ApplyConfiguration(new AnimalConfiguration());
 	}
 
 	public void FillDefaultValues()
@@ -47,11 +49,14 @@ public sealed class DatabaseContext : DbContext
 			Clients.Add(client);
 		}
 		
-		SaveChanges();
-		
 		foreach (Order order in DefaultValues.Orders)
 		{
 			Orders.Add(order);
+		}
+		
+		foreach (Animal animal in DefaultValues.Animals)
+		{
+			Animals.Add(animal);
 		}
 
 		SaveChanges();

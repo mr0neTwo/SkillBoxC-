@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace BankSystem.ViewModels
 {
-    public class TransactionViewModel : ViewModel
+    public sealed class TransactionViewModel : ViewModel
     {
         public ObservableCollection<Direction> DirectionOptions { get; set; }
         public ObservableCollection<TransferType> TransferTypeOptions { get; set; }
@@ -62,12 +62,7 @@ namespace BankSystem.ViewModels
                 OnPropertyChanged(nameof(Comment));
             }
         }
-
-        public ICommand CloseWindowCommand => new DelegateCommand(CloseWindow);
-        public ICommand CreateCommand => new DelegateCommand(Create);
-
-        public bool ShowTransferOptions => _transaction.Direction == Direction.Transfer;
-        public Transaction Transaction => _transaction;
+        
         public int ClientId 
         { 
             private get => clientId; 
@@ -78,6 +73,12 @@ namespace BankSystem.ViewModels
             }
         }
 
+        public ICommand CloseWindowCommand => new DelegateCommand(CloseWindow);
+        public ICommand CreateCommand => new DelegateCommand(Create);
+
+        public bool ShowTransferOptions => _transaction.Direction == Direction.Transfer;
+        public Transaction Transaction => _transaction;
+        
         private Transaction _transaction;
         private TransferType _transactionType;
         private TransferData _transactionData;
@@ -103,6 +104,7 @@ namespace BankSystem.ViewModels
             };
 
             TransferDataOptions.Clear();
+            
             foreach (BankAccount bankAccount in bankAccounts)
             {
                 if (TransferType == TransferType.External && bankAccount.ClientID == ClientId)

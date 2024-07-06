@@ -1,0 +1,119 @@
+<Window x:Class="ZooRepositoryView.Views.AnimalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:ZooRepositoryView.ViewModels"
+        mc:Ignorable="d"
+        
+        Title="Animal" 
+        Height="200" 
+        Width="300"
+        ResizeMode="NoResize"
+        >
+    
+    <Window.DataContext>
+        <vm:AnimalViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="AnimalName"
+            Margin="5"
+        />
+        
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding Name}"
+        />
+        
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Age"
+            Margin="5"
+        />
+        
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding Age}"
+        />
+        
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Weight"
+            Margin="5"
+        />
+        
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding Weight}"
+        />
+        
+        <TextBlock 
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Type"
+            Margin="5"
+        />
+
+        <ComboBox 
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="5"
+            ItemsSource="{Binding AnimalTypeOptions}"
+            SelectedItem="{Binding AnimalType}"
+        />      
+        
+        <StackPanel 
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+        >
+            
+            <Button
+                Content="Save"
+                Margin="10"
+                Padding="8 4"
+                Command="{Binding SaveCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            />
+            
+            <Button
+                Content="Cancel"
+                Margin="10"
+                Padding="8 4"
+                Command="{Binding CancelCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            />
+            
+        </StackPanel>
+        
+    </Grid>
+    
+</Window>

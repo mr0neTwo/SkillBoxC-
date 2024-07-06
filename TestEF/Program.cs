@@ -15,6 +15,7 @@ public static class Program
 
 		List<Client> clients = database.Clients.Include(client => client.Orders).ToList();
 		List<Order> orders = database.Orders.Include(order => order.Client).ToList();
+		List<Animal> animals = database.Animals.ToList();
 
 		StringBuilder clientsResult = new();
 
@@ -50,5 +51,21 @@ public static class Program
 		}
 
 		Console.WriteLine(ordersResult.ToString());
+		Console.WriteLine();
+		
+		StringBuilder animalsResult = new();
+
+		animalsResult.Append("Animals:\n");
+
+		foreach (Animal animal in animals)
+		{
+			animalsResult.Append($"{animal.Name,-12}");
+			animalsResult.Append($"{animal.Age,-6}");
+			animalsResult.Append($"{animal.Weight,-6}");
+			animalsResult.Append($"{animal.AnimalType,-10}");
+			animalsResult.Append("\n");
+		}
+
+		Console.WriteLine(animalsResult.ToString());
 	}
 }
