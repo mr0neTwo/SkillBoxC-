@@ -10,6 +10,7 @@ public sealed class DatabaseContext : DbContext
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<Animal> Animals { get; set; }
+	public DbSet<Student> Students { get; set; }
 	
 	public DatabaseContext()
 	{
@@ -37,6 +38,7 @@ public sealed class DatabaseContext : DbContext
 		modelBuilder.ApplyConfiguration(new ClientConfiguration());
 		modelBuilder.ApplyConfiguration(new OrderConfiguration());
 		modelBuilder.ApplyConfiguration(new AnimalConfiguration());
+		modelBuilder.ApplyConfiguration(new StudentConfiguration());
 	}
 
 	public void FillDefaultValues()

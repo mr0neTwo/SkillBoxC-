@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Notes";
+}
+
+@using DatabasePN.Entities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<DatabasePN.Entities.Note>
+
+<h1>Notes</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Note note in Model)
+    {
+    <tr>
+        <td>@note.Id</td>
+        <td>@note.FirstName</td>
+        <td>@note.SecondName</td>
+        <td>@note.ThirdName</td>
+        <td>
+            <a
+                class="btn btn-primary"
+                asp-controller="Note"
+                asp-action="Show"
+                asp-route-id="@note.Id"
+            >
+                Show
+            </a>
+            <a
+                class="btn btn-primary ms-3"
+                asp-controller="Note"
+                asp-action="Edit"
+                asp-route-id="@note.Id"
+            >
+                Edit
+            </a>
+        </td>
+    </tr>
+    }
+    </tbody>
+
+</table>
