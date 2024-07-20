@@ -1,0 +1,42 @@
+@model UserRegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="w-25">
+
+        <h3 class="text-center  m-2">Register</h3>
+
+        <form asp-controller="Account" asp-action="Register" asp-antiforgery="true" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-xl  m-2">
+                <div class="">
+                    <input asp-for="UserName" class="form-control" placeholder="username"/>
+                </div>
+            </div>
+
+            <div class="col-xl  m-2">
+                <div class="">
+                    <input asp-for="Password" class="form-control" placeholder="password"/>
+                </div>
+            </div>
+
+            <div class="col-xl  m-2">
+                <div class="">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="password"/>
+                </div>
+            </div>
+
+            <div class="text-center col-xl  m-2">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

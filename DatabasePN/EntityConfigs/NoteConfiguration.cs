@@ -1,6 +1,6 @@
-using DatabasePN.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PhoneNoteApplication.Models;
 
 namespace DatabasePN.EntityConfigs;
 

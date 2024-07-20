@@ -1,0 +1,38 @@
+@model PhoneNotes.Models.UserLoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-center">
+   
+        <div class="w-25">
+
+            <h3 class="text-center m-2">Login</h3>
+
+            <form asp-controller="Account" asp-action="Login" asp-antiforgery="true" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ReturnUrl"/>
+
+                <div class="col-xl m-2">
+                    <div class="">
+                        <input asp-for="UserName" class="form-control" placeholder="username"/>
+                    </div>
+                </div>
+
+                <div class="col-xl m-2">
+                    <div class="">
+                        <input asp-for="Password" class="form-control" placeholder="password"/>
+                    </div>
+                </div>
+
+                <div class="text-center col-xl m-2">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+
+            </form>
+        </div>
+    
+</div>

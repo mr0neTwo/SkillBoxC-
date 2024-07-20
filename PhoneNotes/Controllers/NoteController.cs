@@ -1,8 +1,9 @@
 using System.Diagnostics;
 using DatabasePN;
-using DatabasePN.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PhoneNoteApplication.Models;
 using PhoneNotes.Models;
 
 namespace PhoneNotes.Controllers;
@@ -14,26 +15,28 @@ public sealed class NoteController : Controller
 	public NoteController(DatabaseContext database)
 	{
 		_database = database;
-		// _database.FillDefaultValues();
 	}
-	
 
+
+	[Authorize]
 	public async Task<IActionResult> List()
 	{
 		List<Note> listAsync = await _database.Notes.ToListAsync();
 
 		return View(listAsync);
 	}
-	
+
 	[HttpGet]
+	[Authorize]
 	public IActionResult Add()
 	{
 		Note note = new();
-		
+
 		return View(note);
 	}
-	
+
 	[HttpPost]
+	[Authorize]
 	public async Task<IActionResult> Add(Note viewModel)
 	{
 		await _database.Notes.AddAsync(viewModel);
@@ -41,8 +44,9 @@ public sealed class NoteController : Controller
 
 		return RedirectToAction("List", "Note");
 	}
-	
+
 	[HttpPost]
+	[Authorize]
 	public async Task<IActionResult> Edit(Note viewModel)
 	{
 		Note? note = await _database.Notes.FindAsync(viewModel.Id);
@@ -58,19 +62,21 @@ public sealed class NoteController : Controller
 
 			await _database.SaveChangesAsync();
 		}
-		
+
 		return RedirectToAction("List", "Note");
 	}
 
 	[HttpGet]
+	[Authorize]
 	public async Task<IActionResult> Edit(int id)
 	{
 		Note? note = await _database.Notes.FindAsync(id);
 
 		return View(note);
 	}
-	
+
 	[HttpGet]
+	[Authorize]
 	public async Task<IActionResult> Show(int id)
 	{
 		Note? note = await _database.Notes.FindAsync(id);
@@ -85,24 +91,24 @@ public sealed class NoteController : Controller
 	}
 
 	[HttpPost]
+	[Authorize]
 	public IActionResult Back()
 	{
 		return RedirectToAction("List", "Note");
 	}
-	
+
 	[HttpPost]
+	[Authorize]
 	public async Task<IActionResult> Delete(Note viewModel)
 	{
-		Note? note = await _database.Notes
-										  .AsNoTracking()
-										  .FirstOrDefaultAsync(n => n.Id == viewModel.Id);
+		Note? note = await _database.Notes.AsNoTracking().FirstOrDefaultAsync(n => n.Id == viewModel.Id);
 
 		if (note is not null)
 		{
 			_database.Notes.Remove(note);
 			await _database.SaveChangesAsync();
 		}
-		
+
 		return RedirectToAction("List", "Note");
 	}
 }

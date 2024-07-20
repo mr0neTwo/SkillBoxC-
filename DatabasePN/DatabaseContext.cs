@@ -1,12 +1,14 @@
-﻿using DatabasePN.Entities;
-using DatabasePN.EntityConfigs;
+﻿using DatabasePN.EntityConfigs;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PhoneNoteApplication.Models;
 
 namespace DatabasePN;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : IdentityDbContext<User, Role, int>
 {
 	public DbSet<Note> Notes { get; set; }
+	
 	
 	public DatabaseContext(DbContextOptions<DatabaseContext> options)
 		: base(options)
@@ -15,19 +17,10 @@ public class DatabaseContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.ApplyConfiguration(new NoteConfiguration());
-	}
-	
-	public void FillDefaultValues()
-	{
-		Database.EnsureDeleted();
-		Database.EnsureCreated();
-
-		foreach (Note note in DefaultValues.DefaultValues.Notes())
-		{
-			Notes.Add(note);
-		}
+		base.OnModelCreating(modelBuilder);
 		
-		SaveChanges();
+		modelBuilder.ApplyConfiguration(new NoteConfiguration());
+		modelBuilder.ApplyConfiguration(new UserConfiguration());
+		modelBuilder.ApplyConfiguration(new RoleConfiguration());
 	}
 }

@@ -1,4 +1,4 @@
-using DatabasePN.Entities;
+using PhoneNoteApplication.Models;
 
 namespace DatabasePN.DefaultValues;
 

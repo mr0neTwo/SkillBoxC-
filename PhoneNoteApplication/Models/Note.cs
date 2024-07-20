@@ -1,4 +1,4 @@
-namespace DatabasePN.Entities;
+namespace PhoneNoteApplication.Models;
 
 public sealed class Note
 {
