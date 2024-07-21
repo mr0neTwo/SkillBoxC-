@@ -4,18 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneNoteApplication.Models;
 
-namespace PhoneNotes.Controllers;
+namespace PhoneNoteAuthJWT.Controllers;
 
-public sealed class ApiController : Controller
+[Route("api/[controller]")]
+[ApiController]
+public sealed class NoteController : Controller
 {
 	private readonly DatabaseContext _database;
 
-	public ApiController(DatabaseContext database)
+	public NoteController(DatabaseContext database)
 	{
 		_database = database;
 	}
 	
-	[HttpGet]
+	[HttpGet("list")]
 	[Authorize]
 	public async Task<ActionResult<List<Note>>> GetAllNotes()
 	{
@@ -24,7 +26,7 @@ public sealed class ApiController : Controller
 		return new JsonResult(listAsync);
 	}
 
-	[HttpPost]
+	[HttpPost("add")]
 	[Authorize]
 	public async Task<ActionResult<int>> Add([FromBody] Note viewModel)
 	{
@@ -34,7 +36,7 @@ public sealed class ApiController : Controller
 		return new JsonResult(viewModel.Id);
 	}
 
-	[HttpPost]
+	[HttpPost("edit")]
 	[Authorize]
 	public async Task<IActionResult> Edit([FromBody] Note viewModel)
 	{
@@ -56,7 +58,7 @@ public sealed class ApiController : Controller
 	}
 	
 
-	[HttpPost]
+	[HttpPost("delete")]
 	[Authorize]
 	public async Task<IActionResult> Delete([FromBody] Note viewModel)
 	{

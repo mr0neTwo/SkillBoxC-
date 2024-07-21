@@ -54,7 +54,6 @@ public sealed class ApiAccountController : Controller
 	// 	return new JsonResult(userWithRolesAndClaims);
 	// }
 	
-	[HttpPost]
 	public async Task<IActionResult> Login([FromBody] UserLoginModel model)
 	{
 		if (!ModelState.IsValid)
@@ -69,8 +68,8 @@ public sealed class ApiAccountController : Controller
 			return Unauthorized();
 		}
 
-		User user = await _userManager.FindByNameAsync(model.UserName);
-		IList<string> roles = await _userManager.GetRolesAsync(user);
+		var user = await _userManager.FindByNameAsync(model.UserName);
+		var roles = await _userManager.GetRolesAsync(user);
 
 		var claims = new List<Claim>
 		{
@@ -78,24 +77,21 @@ public sealed class ApiAccountController : Controller
 			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 			new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
 		};
-		
 
 		foreach (var role in roles)
 		{
 			claims.Add(new Claim(ClaimTypes.Role, role));
 		}
 
-		SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
-		SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);
+		var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
+		var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-		JwtSecurityToken token = new 
-		(
-			issuer : _configuration["JwtSettings:Issuer"],
-			audience : _configuration["JwtSettings:Audience"],
-			claims : claims,
-			expires : DateTime.Now.AddMinutes(30),
-			signingCredentials : creds
-		);
+		var token = new JwtSecurityToken(
+			issuer: _configuration["JwtSettings:Issuer"],
+			audience: _configuration["JwtSettings:Audience"],
+			claims: claims,
+			expires: DateTime.Now.AddMinutes(30),
+			signingCredentials: creds);
 
 		return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
 	}

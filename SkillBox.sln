@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNotesDesktop", "PhoneN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNoteApplication", "PhoneNoteApplication\PhoneNoteApplication.csproj", "{1C95369C-AAC2-4687-8CAF-7912F4B68CB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNoteAuthJWT", "PhoneNoteAuthJWT\PhoneNoteAuthJWT.csproj", "{1D08C546-9239-49BC-94B1-B709A846FC60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +207,10 @@ Global
 		{1C95369C-AAC2-4687-8CAF-7912F4B68CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C95369C-AAC2-4687-8CAF-7912F4B68CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C95369C-AAC2-4687-8CAF-7912F4B68CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D08C546-9239-49BC-94B1-B709A846FC60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D08C546-9239-49BC-94B1-B709A846FC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D08C546-9239-49BC-94B1-B709A846FC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D08C546-9239-49BC-94B1-B709A846FC60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -235,6 +241,7 @@ Global
 		{E5F9C6DE-0B81-435C-96BA-5524CCA85CA6} = {7480940F-79AC-47CC-B4EA-8ECB42B3930E}
 		{BF1DA5FB-C1BE-4B76-A948-F08EC08E0E08} = {7480940F-79AC-47CC-B4EA-8ECB42B3930E}
 		{1C95369C-AAC2-4687-8CAF-7912F4B68CB4} = {7480940F-79AC-47CC-B4EA-8ECB42B3930E}
+		{1D08C546-9239-49BC-94B1-B709A846FC60} = {7480940F-79AC-47CC-B4EA-8ECB42B3930E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC5F1EAA-0193-42D5-B7D3-C529CE783D36}

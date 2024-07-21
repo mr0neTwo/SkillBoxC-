@@ -26,4 +26,8 @@
       <_ContentIncludedByDefault Remove="Views\Students\List.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Middleware\" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,6 @@
+@PhoneNoteAuthJWT_HostAddress = http://localhost:5124
+
+GET {{PhoneNoteAuthJWT_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

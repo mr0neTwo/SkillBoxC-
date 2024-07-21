@@ -1,9 +1,6 @@
-using System.Text;
 using DatabasePN;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using PhoneNoteApplication.Models;
 using PhoneNotes.Data;
 
@@ -24,12 +21,14 @@ builder.Services.AddIdentity<User, Role>
 			   options.Password.RequireLowercase = false;
 			   options.Password.RequireUppercase = false;
 			   options.Password.RequireNonAlphanumeric = false;
-			   
+
 			   options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 			   options.Lockout.MaxFailedAccessAttempts = 10;
 			   options.Lockout.AllowedForNewUsers = true;
-			   
-			   options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+
+			   options.User.AllowedUserNameCharacters =
+				   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
 			   options.User.RequireUniqueEmail = false;
 		   }
 	   )
@@ -49,37 +48,7 @@ builder.Services.ConfigureApplicationCookie
 	}
 );
 
-IConfigurationSection jwtSettings = builder.Configuration.GetSection("JwtSettings");
-
-builder.Services.AddAuthentication
-	   (
-		   options =>
-		   {
-			   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-			   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-		   }
-	   )
-	   .AddJwtBearer
-	   (
-		   options =>
-		   {
-			   options.TokenValidationParameters = new TokenValidationParameters
-			   {
-				   ValidateIssuer = true,
-				   ValidateAudience = true,
-				   ValidateLifetime = true,
-				   ValidateIssuerSigningKey = true,
-				   ValidIssuer = jwtSettings["Issuer"],
-				   ValidAudience = jwtSettings["Audience"],
-				   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!))
-			   };
-		   }
-	   );
-
-builder.Services.AddAuthorization();
-builder.Services.AddControllers();
-
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -88,9 +57,9 @@ using (var scope = app.Services.CreateScope())
 	try
 	{
 		DatabaseContext context = serviceProvider.GetRequiredService<DatabaseContext>();
-
 		UserManager<User> userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 		RoleManager<Role> roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
+		
 		await DatabaseInitializer.Rebuild(context, userManager, roleManager);
 	}
 	catch (Exception exception)
@@ -103,17 +72,15 @@ using (var scope = app.Services.CreateScope())
 if (!app.Environment.IsDevelopment())
 {
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
-
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();// Ensure this is before UseAuthorization
 app.UseAuthorization();
 
 app.MapControllerRoute(name : "default", pattern : "{controller=Note}/{action=List}/{id?}");
