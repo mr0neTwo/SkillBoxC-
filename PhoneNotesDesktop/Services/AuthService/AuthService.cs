@@ -2,7 +2,6 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using PhoneNoteAuthJWT.Models;
-using UserLoginModel = PhoneNotes.Models.UserLoginModel;
 
 namespace PhoneNotesDesktop.Services.AuthService;
 

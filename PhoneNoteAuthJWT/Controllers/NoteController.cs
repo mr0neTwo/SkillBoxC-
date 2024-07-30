@@ -6,8 +6,8 @@ using PhoneNoteApplication.Models;
 
 namespace PhoneNoteAuthJWT.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/note/")]
 public sealed class NoteController : Controller
 {
 	private readonly DatabaseContext _database;
@@ -17,8 +17,8 @@ public sealed class NoteController : Controller
 		_database = database;
 	}
 	
-	[HttpGet("list")]
 	[Authorize]
+	[HttpGet("list")]
 	public async Task<ActionResult<List<Note>>> GetAllNotes()
 	{
 		List<Note> listAsync = await _database.Notes.ToListAsync();
@@ -26,8 +26,8 @@ public sealed class NoteController : Controller
 		return new JsonResult(listAsync);
 	}
 
-	[HttpPost("add")]
 	[Authorize]
+	[HttpPost("add")]
 	public async Task<ActionResult<int>> Add([FromBody] Note viewModel)
 	{
 		await _database.Notes.AddAsync(viewModel);
@@ -36,8 +36,8 @@ public sealed class NoteController : Controller
 		return new JsonResult(viewModel.Id);
 	}
 
-	[HttpPost("edit")]
 	[Authorize]
+	[HttpPost("edit")]
 	public async Task<IActionResult> Edit([FromBody] Note viewModel)
 	{
 		Note? note = await _database.Notes.FindAsync(viewModel.Id);
@@ -58,8 +58,8 @@ public sealed class NoteController : Controller
 	}
 	
 
-	[HttpPost("delete")]
 	[Authorize]
+	[HttpPost("delete")]
 	public async Task<IActionResult> Delete([FromBody] Note viewModel)
 	{
 		Note? note = await _database.Notes.AsNoTracking().FirstOrDefaultAsync(note => note.Id == viewModel.Id);

@@ -1,29 +1,29 @@
-using System.Text;
 using DatabasePN;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhoneNoteAuthJWT.Data;
+using PhoneNoteAuthJWT.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var appConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(appConnectionString));
 
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	   .AddJwtBearer
 	   (
-		   JwtBearerDefaults.AuthenticationScheme, options =>
+		   options =>
 		   {
 			   options.TokenValidationParameters = new TokenValidationParameters
 			   {
+				   ValidIssuer = AuthOptions.ISSUER,
+				   ValidAudience = AuthOptions.AUDIENCE,
 				   ValidateIssuer = false,
 				   ValidateAudience = false,
-				   ValidateLifetime = true,
-				   ValidateIssuerSigningKey = true,
-				   IssuerSigningKey = new SymmetricSecurityKey
-					   (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+				   ValidateLifetime = false,
+				   ValidateIssuerSigningKey = false,
+				   IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
 			   };
 		   }
 	   );
@@ -46,7 +46,8 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+app.UseMiddleware<TestMiddleware>();
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();

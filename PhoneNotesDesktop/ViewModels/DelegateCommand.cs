@@ -2,7 +2,7 @@ using System.Windows.Input;
 
 namespace PhoneNotesDesktop.ViewModels;
 
-public class DelegateCommand : ICommand
+public sealed class DelegateCommand : ICommand
 {
 	private readonly Action<object> _execute;
 	private readonly Func<object, bool> _canExecute;

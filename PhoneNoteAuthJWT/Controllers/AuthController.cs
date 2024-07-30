@@ -6,21 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PhoneNoteApplication.Models;
+using PhoneNoteAuthJWT.Data;
 using PhoneNoteAuthJWT.Models;
 
 namespace PhoneNoteAuthJWT.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
 	private readonly DatabaseContext _context;
-	private readonly IConfiguration _config;
 
-	public AuthController(DatabaseContext context, IConfiguration config)
+	public AuthController(DatabaseContext context)
 	{
 		_context = context;
-		_config = config;
 	}
 
 	[HttpPost("register")]
@@ -61,7 +60,7 @@ public class AuthController : ControllerBase
 
 	private string GenerateToken(User user)
 	{
-		SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+		SymmetricSecurityKey securityKey = AuthOptions.GetSymmetricSecurityKey();
 		SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
 		Claim[] claims =
@@ -73,6 +72,8 @@ public class AuthController : ControllerBase
 
 		JwtSecurityToken token = new
 		(
+			issuer : AuthOptions.ISSUER,
+			audience : AuthOptions.AUDIENCE,
 			claims : claims, 
 			expires : DateTime.UtcNow.AddHours(48),
 			signingCredentials : credentials

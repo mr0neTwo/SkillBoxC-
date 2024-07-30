@@ -16,7 +16,6 @@
     <ItemGroup>
       <ProjectReference Include="..\DatabasePN\DatabasePN.csproj" />
       <ProjectReference Include="..\PhoneNoteAuthJWT\PhoneNoteAuthJWT.csproj" />
-      <ProjectReference Include="..\PhoneNotes\PhoneNotes.csproj" />
     </ItemGroup>
 
     <ItemGroup>
